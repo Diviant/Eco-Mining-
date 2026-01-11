@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Leaf, Zap, Droplets, Info, Thermometer } from 'lucide-react';
+import { Leaf, Droplets, Info, Thermometer } from 'lucide-react';
 
 const GreenhouseSection: React.FC = () => {
   const [selectedPlant, setSelectedPlant] = useState<number | null>(null);
@@ -13,16 +13,16 @@ const GreenhouseSection: React.FC = () => {
   ];
 
   return (
-    <section id="greenhouse" className="py-32 bg-white">
+    <section id="greenhouse" className="py-32 bg-white dark:bg-slate-950 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row-reverse items-center gap-24">
           <div className="flex-1">
             <div className="w-16 h-1.5 bg-emerald-500 rounded-full mb-8"></div>
-            <h2 className="text-5xl font-black text-slate-900 mb-8 leading-tight italic">
+            <h2 className="text-5xl font-black text-slate-900 dark:text-white mb-8 leading-tight italic">
               Агро-активы <br/>
-              <span className="text-emerald-600">Complex-X</span>
+              <span className="text-emerald-600 dark:text-emerald-500">Complex-X</span>
             </h2>
-            <p className="text-xl text-slate-500 mb-12 leading-relaxed">
+            <p className="text-xl text-slate-500 dark:text-slate-400 mb-12 leading-relaxed">
               Тепло от майнеров — это бесплатный ресурс. Мы направляем его на поддержание идеального микроклимата для культур с коротким циклом и высокой маржинальностью.
             </p>
             
@@ -33,14 +33,16 @@ const GreenhouseSection: React.FC = () => {
                   onMouseEnter={() => setSelectedPlant(idx)}
                   onMouseLeave={() => setSelectedPlant(null)}
                   className={`relative group cursor-pointer p-6 rounded-3xl transition-all duration-300 border ${
-                    selectedPlant === idx ? 'bg-emerald-600 text-white border-emerald-600 shadow-xl' : 'bg-slate-50 border-slate-100 text-slate-900'
+                    selectedPlant === idx 
+                      ? 'bg-emerald-600 dark:bg-emerald-500 text-white border-emerald-600 dark:border-emerald-500 shadow-xl' 
+                      : 'bg-slate-50 dark:bg-slate-900 border-slate-100 dark:border-slate-800 text-slate-900 dark:text-white'
                   }`}
                 >
                   <div className="flex justify-between items-start mb-4">
-                    <div className={`p-3 rounded-xl ${selectedPlant === idx ? 'bg-white/20' : 'bg-white shadow-sm'} transition-colors`}>
+                    <div className={`p-3 rounded-xl ${selectedPlant === idx ? 'bg-white/20' : 'bg-white dark:bg-slate-800 shadow-sm'} transition-colors`}>
                       {item.icon}
                     </div>
-                    <Info className={`w-4 h-4 opacity-50 ${selectedPlant === idx ? 'text-white' : 'text-slate-400'}`} />
+                    <Info className={`w-4 h-4 opacity-50 ${selectedPlant === idx ? 'text-white' : 'text-slate-400 dark:text-slate-500'}`} />
                   </div>
                   <h4 className="font-black text-lg mb-1">{item.title}</h4>
                   
@@ -51,7 +53,7 @@ const GreenhouseSection: React.FC = () => {
                       <div className="flex justify-between"><span>Маржа:</span> <span>{item.profit}</span></div>
                     </div>
                   ) : (
-                    <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-2">Наведите для деталей</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mt-2">Наведите для деталей</p>
                   )}
                 </div>
               ))}
@@ -61,27 +63,27 @@ const GreenhouseSection: React.FC = () => {
           <div className="flex-1 relative">
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-6">
-                <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl group">
+                <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl group border-4 border-slate-50 dark:border-slate-900">
                   <img src="https://images.unsplash.com/photo-1592533011831-7bc33b276228?auto=format&fit=crop&q=80&w=600" alt="Basil" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 </div>
-                <div className="bg-emerald-600 aspect-square rounded-[3rem] p-10 flex flex-col justify-end text-white shadow-xl">
+                <div className="bg-emerald-600 dark:bg-emerald-700 aspect-square rounded-[3rem] p-10 flex flex-col justify-end text-white shadow-xl">
                   <Droplets className="w-10 h-10 mb-6 text-emerald-200" />
                   <span className="text-4xl font-black">95%</span>
                   <span className="text-emerald-100 font-bold text-sm uppercase">Автоматизация полива</span>
                 </div>
               </div>
               <div className="pt-16 space-y-6">
-                <div className="bg-slate-900 aspect-square rounded-[3rem] p-10 flex flex-col justify-end text-white shadow-xl">
+                <div className="bg-slate-900 dark:bg-black aspect-square rounded-[3rem] p-10 flex flex-col justify-end text-white shadow-xl">
                   <Thermometer className="w-10 h-10 mb-6 text-emerald-500" />
                   <span className="text-4xl font-black">Stable</span>
                   <span className="text-slate-400 font-bold text-sm uppercase">Климатический контроль</span>
                 </div>
-                <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl group">
+                <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl group border-4 border-slate-50 dark:border-slate-900">
                   <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&q=80&w=600" alt="Micro" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 </div>
               </div>
             </div>
-            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-emerald-500/5 blur-[120px] rounded-full"></div>
+            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-emerald-500/5 dark:bg-emerald-500/10 blur-[120px] rounded-full"></div>
           </div>
         </div>
       </div>

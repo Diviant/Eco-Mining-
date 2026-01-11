@@ -182,11 +182,11 @@ const App: React.FC = () => {
           <EconomySection />
         </div>
         
-        <div className="bg-slate-50 dark:bg-slate-900/50 reveal">
+        <div className="bg-slate-50 dark:bg-slate-900/50 transition-colors reveal">
           <MiningRole />
         </div>
         
-        <section className="py-24 bg-white dark:bg-slate-950 reveal">
+        <section className="py-24 bg-white dark:bg-slate-950 transition-colors reveal">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h3 className="text-slate-400 dark:text-slate-600 text-[10px] font-black uppercase tracking-[0.4em] mb-12">Технологические партнеры</h3>
             <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-30 dark:opacity-20 grayscale hover:grayscale-0 transition-all">
@@ -199,7 +199,7 @@ const App: React.FC = () => {
           </div>
         </section>
         
-        <section className="py-32 bg-emerald-600 dark:bg-emerald-700 relative overflow-hidden reveal">
+        <section className="py-32 bg-emerald-600 dark:bg-emerald-700 relative overflow-hidden transition-colors reveal">
           <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leaf.png')]"></div>
           <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
             <h2 className="text-4xl md:text-6xl font-black text-white mb-8">Готовы обсудить <br/> ваш Complex-X?</h2>
@@ -220,7 +220,7 @@ const App: React.FC = () => {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer theme={theme} />
     </div>
   );
 };

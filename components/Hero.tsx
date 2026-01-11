@@ -34,7 +34,8 @@ const Hero: React.FC<Props> = ({ onCalcClick }) => {
         }
       } catch (error) {
         console.error("Image generation failed", error);
-        setImageUrl("https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&q=80&w=2000");
+        // Заменяем солнечные панели на футуристичную вертикальную ферму
+        setImageUrl("https://images.unsplash.com/photo-1592533011831-7bc33b276228?auto=format&fit=crop&q=80&w=2000"); 
       } finally {
         setLoading(false);
       }
@@ -45,7 +46,7 @@ const Hero: React.FC<Props> = ({ onCalcClick }) => {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-slate-100 dark:bg-slate-900">
         {loading ? (
           <div className="w-full h-full bg-slate-900 dark:bg-black flex flex-col items-center justify-center space-y-4">
             <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
@@ -54,11 +55,10 @@ const Hero: React.FC<Props> = ({ onCalcClick }) => {
         ) : (
           <>
             <img 
-              src={imageUrl || ''} 
+              src={imageUrl || 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=2000'} 
               alt="Autonomous Agro Mining Complex" 
-              className="w-full h-full object-cover scale-105 animate-slow-zoom"
+              className="w-full h-full object-cover scale-105 animate-slow-zoom opacity-70 dark:opacity-40"
             />
-            {/* Градиентный оверлей меняется в зависимости от темы */}
             <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent lg:from-white lg:via-white/50 dark:from-slate-950 dark:via-slate-950/70 dark:to-transparent transition-colors duration-500"></div>
           </>
         )}
@@ -76,12 +76,12 @@ const Hero: React.FC<Props> = ({ onCalcClick }) => {
             </div>
           </div>
           
-          <h1 className="text-6xl md:text-[5.5rem] font-black text-slate-900 dark:text-white leading-[0.9] mb-10 tracking-tighter">
+          <h1 className="text-6xl md:text-[5.5rem] font-black text-slate-900 dark:text-white leading-[0.9] mb-10 tracking-tighter transition-colors">
             Майнинг, <br/>
             <span className="text-emerald-600 dark:text-emerald-500">который кормит</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-12 leading-relaxed font-medium max-w-2xl">
+          <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-12 leading-relaxed font-medium max-w-2xl transition-colors">
             Первая в СНГ промышленная экосистема: собственная газогенерация, IT-кластер для майнинга и вертикальные фермы премиальной зелени в одном контуре.
           </p>
           
@@ -100,17 +100,17 @@ const Hero: React.FC<Props> = ({ onCalcClick }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl">
             <div className="flex items-start space-x-4">
-              <div className="bg-emerald-100 dark:bg-emerald-900/50 p-2 rounded-lg text-emerald-600 dark:text-emerald-400"><Zap size={20} strokeWidth={3} /></div>
+              <div className="bg-emerald-100 dark:bg-emerald-900/50 p-2 rounded-lg text-emerald-600 dark:text-emerald-400 transition-colors"><Zap size={20} strokeWidth={3} /></div>
               <div>
-                <div className="text-slate-900 dark:text-white font-black text-lg">1.8 ₽ / кВт</div>
-                <div className="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase">Цена энергии</div>
+                <div className="text-slate-900 dark:text-white font-black text-lg transition-colors">1.8 ₽ / кВт</div>
+                <div className="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase transition-colors">Цена энергии</div>
               </div>
             </div>
             <div className="flex items-start space-x-4">
-              <div className="bg-emerald-100 dark:bg-emerald-900/50 p-2 rounded-lg text-emerald-600 dark:text-emerald-400"><ShieldCheck size={20} strokeWidth={3} /></div>
+              <div className="bg-emerald-100 dark:bg-emerald-900/50 p-2 rounded-lg text-emerald-600 dark:text-emerald-400 transition-colors"><ShieldCheck size={20} strokeWidth={3} /></div>
               <div>
-                <div className="text-slate-900 dark:text-white font-black text-lg">99.8%</div>
-                <div className="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase">Uptime системы</div>
+                <div className="text-slate-900 dark:text-white font-black text-lg transition-colors">99.8%</div>
+                <div className="text-slate-400 dark:text-slate-500 text-[10px] font-bold uppercase transition-colors">Uptime системы</div>
               </div>
             </div>
           </div>
