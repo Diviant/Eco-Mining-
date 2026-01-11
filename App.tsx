@@ -13,11 +13,30 @@ import DetailsPage from './components/DetailsPage';
 import { Activity, Globe, ShieldCheck, Cpu } from 'lucide-react';
 
 type PageState = 'home' | 'tech' | 'energy' | 'agro' | 'economy';
+type Theme = 'light' | 'dark';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<PageState>('home');
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') as Theme || 'light';
+    }
+    return 'light';
+  });
 
-  // Анимация появления при скролле (Scroll Reveal)
+  // Управление темой
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
+
+  // Анимация появления при скролле
   useEffect(() => {
     const observerOptions = {
       threshold: 0.15,
@@ -32,7 +51,6 @@ const App: React.FC = () => {
       });
     }, observerOptions);
 
-    // Даем React время на отрисовку, затем начинаем наблюдение
     const timer = setTimeout(() => {
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }, 500);
@@ -41,7 +59,7 @@ const App: React.FC = () => {
       clearTimeout(timer);
       observer.disconnect();
     };
-  }, [activePage]);
+  }, [activePage, theme]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -110,10 +128,10 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 transition-colors duration-500 selection:bg-emerald-100 dark:selection:bg-emerald-900/30 selection:text-emerald-900 dark:selection:text-emerald-100">
       {renderDetails()}
       
-      <Navbar />
+      <Navbar theme={theme} onThemeToggle={toggleTheme} />
       <main className={activePage !== 'home' ? 'hidden' : ''}>
         <Hero onCalcClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })} />
         
@@ -121,8 +139,7 @@ const App: React.FC = () => {
           <HowItWorks onDetailClick={(id) => setActivePage(id as any)} />
         </div>
 
-        {/* НОВЫЙ БЛОК: LIVE STATS (Заполняем пустоту) */}
-        <section className="py-20 bg-slate-900 text-white overflow-hidden relative reveal">
+        <section className="py-20 bg-slate-900 dark:bg-black text-white overflow-hidden relative reveal">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
               <div className="text-center">
@@ -165,25 +182,24 @@ const App: React.FC = () => {
           <EconomySection />
         </div>
         
-        <div className="bg-slate-50 reveal">
+        <div className="bg-slate-50 dark:bg-slate-900/50 reveal">
           <MiningRole />
         </div>
         
-        {/* НОВЫЙ БЛОК: ПАРТНЕРЫ (Дополнительное наполнение) */}
-        <section className="py-24 bg-white reveal">
+        <section className="py-24 bg-white dark:bg-slate-950 reveal">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <h3 className="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em] mb-12">Технологические партнеры</h3>
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-30 grayscale hover:grayscale-0 transition-all">
-              <span className="text-2xl font-black text-slate-900">CATERPILLAR</span>
-              <span className="text-2xl font-black text-slate-900">BITMAIN</span>
-              <span className="text-2xl font-black text-slate-900">CUMMINS</span>
-              <span className="text-2xl font-black text-slate-900">SAMSUNG</span>
-              <span className="text-2xl font-black text-slate-900">SCHNEIDER</span>
+            <h3 className="text-slate-400 dark:text-slate-600 text-[10px] font-black uppercase tracking-[0.4em] mb-12">Технологические партнеры</h3>
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-30 dark:opacity-20 grayscale hover:grayscale-0 transition-all">
+              <span className="text-2xl font-black text-slate-900 dark:text-white">CATERPILLAR</span>
+              <span className="text-2xl font-black text-slate-900 dark:text-white">BITMAIN</span>
+              <span className="text-2xl font-black text-slate-900 dark:text-white">CUMMINS</span>
+              <span className="text-2xl font-black text-slate-900 dark:text-white">SAMSUNG</span>
+              <span className="text-2xl font-black text-slate-900 dark:text-white">SCHNEIDER</span>
             </div>
           </div>
         </section>
         
-        <section className="py-32 bg-emerald-600 relative overflow-hidden reveal">
+        <section className="py-32 bg-emerald-600 dark:bg-emerald-700 relative overflow-hidden reveal">
           <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leaf.png')]"></div>
           <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
             <h2 className="text-4xl md:text-6xl font-black text-white mb-8">Готовы обсудить <br/> ваш Complex-X?</h2>

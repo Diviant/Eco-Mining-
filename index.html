@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGRO MINING | Автономные комплексы будущего</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'slow-zoom': 'slow-zoom 20s infinite alternate ease-in-out',
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -16,6 +28,7 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
         .reveal {
             opacity: 0;
@@ -32,6 +45,14 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(16, 185, 129, 0.1);
         }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        @keyframes slow-zoom {
+          0% { transform: scale(1); }
+          100% { transform: scale(1.1); }
+        }
     </style>
 <script type="importmap">
 {
@@ -46,7 +67,7 @@
 }
 </script>
 </head>
-<body class="bg-white text-slate-900 antialiased overflow-x-hidden">
+<body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-50 antialiased overflow-x-hidden">
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
 </body>
