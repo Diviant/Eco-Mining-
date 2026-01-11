@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Zap, Cpu, Thermometer, Sprout, DollarSign } from 'lucide-react';
+import { Zap, Cpu, Thermometer, Sprout, DollarSign, Activity } from 'lucide-react';
 
 interface Props {
   onDetailClick: (id: string) => void;
@@ -11,32 +11,32 @@ const HowItWorks: React.FC<Props> = ({ onDetailClick }) => {
     {
       id: "energy",
       icon: <Zap className="w-8 h-8 text-emerald-600" />,
-      title: "Энергия",
-      desc: "Газогенератор на локальном топливе выдает ток по 2 руб/кВт."
+      title: "Энергоцентр",
+      desc: "Газопоршневые установки (ГПУ) генерируют ток из сетевого газа или ПНГ. Себестоимость — в 3-4 раза ниже рыночных тарифов."
     },
     {
       id: "tech",
       icon: <Cpu className="w-8 h-8 text-blue-600" />,
-      title: "Майнинг",
-      desc: "Оборудование генерирует BTC и огромное количество тепла."
+      title: "Вычисления",
+      desc: "ASIC-майнеры последнего поколения (Antminer S21/T21) добывают криптовалюту, потребляя дешевый ток и выделяя тепло."
     },
     {
       id: "tech",
       icon: <Thermometer className="w-8 h-8 text-orange-500" />,
       title: "Рекуперация",
-      desc: "Бесплатное тепло от майнеров идет на обогрев системы."
+      desc: "Тепловая энергия от майнеров через жидкостный контур подается в систему отопления теплиц. КПД использования энергии — 98%."
     },
     {
       id: "agro",
       icon: <Sprout className="w-8 h-8 text-emerald-500" />,
-      title: "Агро",
-      desc: "Круглогодичный рост лука за счет дармового отопления."
+      title: "Био-лаборатория",
+      desc: "Вертикальные фермы используют тепло для поддержания идеальных +24°C, выращивая до 12 урожаев премиальной зелени в год."
     },
     {
       id: "economy",
-      icon: <DollarSign className="w-8 h-8 text-emerald-700" />,
-      title: "Профит",
-      desc: "Две прибыли: от IT и сельского хозяйства."
+      icon: <Activity className="w-8 h-8 text-emerald-700" />,
+      title: "Максимальная маржа",
+      desc: "Вы зарабатываете дважды: на цифровых активах и на реальном продукте, который востребован ресторанами и ритейлом."
     }
   ];
 
@@ -44,9 +44,9 @@ const HowItWorks: React.FC<Props> = ({ onDetailClick }) => {
     <section id="how-it-works" className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-24">
-          <span className="text-emerald-600 font-bold uppercase tracking-widest text-sm mb-4 block">Цикл эффективности</span>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 italic">Безотходная экосистема</h2>
-          <div className="w-24 h-1.5 bg-emerald-500 mx-auto rounded-full"></div>
+          <div className="inline-block px-4 py-1 bg-emerald-50 text-emerald-700 rounded-full text-[10px] font-black uppercase tracking-widest mb-4">Технологический стек</div>
+          <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 italic tracking-tighter uppercase">Инженерия замкнутого <span className="text-emerald-600">цикла</span></h2>
+          <p className="max-w-2xl mx-auto text-slate-500 font-medium">Мы объединили несовместимые на первый взгляд отрасли в единую высокоэффективную бизнес-модель.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
@@ -54,17 +54,17 @@ const HowItWorks: React.FC<Props> = ({ onDetailClick }) => {
             <div 
               key={idx} 
               onClick={() => onDetailClick(step.id)}
-              className="relative cursor-pointer group p-8 bg-slate-50 rounded-[2.5rem] hover:bg-white hover:shadow-2xl hover:shadow-emerald-100 transition-all duration-500 border border-transparent hover:border-emerald-100"
+              className="relative cursor-pointer group p-8 bg-slate-50 rounded-[3rem] hover:bg-white hover:shadow-2xl hover:shadow-emerald-100/50 transition-all duration-500 border border-slate-100 hover:border-emerald-200"
             >
-              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform">
+              <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-emerald-600 group-hover:text-white group-hover:-translate-y-2 transition-all">
                 {step.icon}
               </div>
-              <div className="text-emerald-200 font-black text-4xl mb-4 opacity-50">0{idx + 1}</div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-emerald-600 transition-colors">{step.title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">{step.desc}</p>
+              <div className="text-emerald-500/20 font-black text-6xl mb-6 tracking-tighter leading-none">0{idx + 1}</div>
+              <h3 className="text-xl font-black text-slate-900 mb-4 tracking-tight">{step.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed font-medium mb-6">{step.desc}</p>
               
-              <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity text-emerald-600 text-[10px] font-black uppercase tracking-widest">
-                Узнать детали →
+              <div className="flex items-center text-emerald-600 text-[10px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                Спецификация <span className="ml-2">→</span>
               </div>
             </div>
           ))}

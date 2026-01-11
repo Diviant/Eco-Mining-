@@ -10,13 +10,39 @@ import MiningRole from './components/MiningRole';
 import Footer from './components/Footer';
 import Calculator from './components/Calculator';
 import DetailsPage from './components/DetailsPage';
+import { Activity, Globe, ShieldCheck, Cpu } from 'lucide-react';
 
 type PageState = 'home' | 'tech' | 'energy' | 'agro' | 'economy';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<PageState>('home');
 
-  // Эффект для прокрутки наверх при смене страницы
+  // Анимация появления при скролле (Scroll Reveal)
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    // Даем React время на отрисовку, затем начинаем наблюдение
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }, 500);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [activePage]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [activePage]);
@@ -71,7 +97,7 @@ const App: React.FC = () => {
 
     if (activePage === 'home') return null;
 
-    const page = pages[activePage];
+    const page = (pages as any)[activePage];
     return (
       <DetailsPage 
         title={page.title} 
@@ -92,8 +118,36 @@ const App: React.FC = () => {
         <Hero onCalcClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })} />
         
         <div className="reveal">
-          <HowItWorks onDetailClick={(id) => setActivePage(id as PageState)} />
+          <HowItWorks onDetailClick={(id) => setActivePage(id as any)} />
         </div>
+
+        {/* НОВЫЙ БЛОК: LIVE STATS (Заполняем пустоту) */}
+        <section className="py-20 bg-slate-900 text-white overflow-hidden relative reveal">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+              <div className="text-center">
+                <Activity className="w-8 h-8 text-emerald-500 mx-auto mb-4" />
+                <div className="text-3xl font-black mb-1">98.4 TH/s</div>
+                <div className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Текущий хешрейт</div>
+              </div>
+              <div className="text-center">
+                <Globe className="w-8 h-8 text-blue-500 mx-auto mb-4" />
+                <div className="text-3xl font-black mb-1">12 объектов</div>
+                <div className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">География Complex-X</div>
+              </div>
+              <div className="text-center">
+                <ShieldCheck className="w-8 h-8 text-emerald-400 mx-auto mb-4" />
+                <div className="text-3xl font-black mb-1">ISO 9001</div>
+                <div className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Сертификация</div>
+              </div>
+              <div className="text-center">
+                <Cpu className="w-8 h-8 text-purple-500 mx-auto mb-4" />
+                <div className="text-3xl font-black mb-1">2.4 MW</div>
+                <div className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Общая мощность</div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <div className="reveal">
           <EnergySection onMore={() => setActivePage('energy')} />
@@ -115,7 +169,20 @@ const App: React.FC = () => {
           <MiningRole />
         </div>
         
-        {/* Final CTA */}
+        {/* НОВЫЙ БЛОК: ПАРТНЕРЫ (Дополнительное наполнение) */}
+        <section className="py-24 bg-white reveal">
+          <div className="max-w-7xl mx-auto px-4 text-center">
+            <h3 className="text-slate-400 text-[10px] font-black uppercase tracking-[0.4em] mb-12">Технологические партнеры</h3>
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-30 grayscale hover:grayscale-0 transition-all">
+              <span className="text-2xl font-black text-slate-900">CATERPILLAR</span>
+              <span className="text-2xl font-black text-slate-900">BITMAIN</span>
+              <span className="text-2xl font-black text-slate-900">CUMMINS</span>
+              <span className="text-2xl font-black text-slate-900">SAMSUNG</span>
+              <span className="text-2xl font-black text-slate-900">SCHNEIDER</span>
+            </div>
+          </div>
+        </section>
+        
         <section className="py-32 bg-emerald-600 relative overflow-hidden reveal">
           <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leaf.png')]"></div>
           <div className="max-w-4xl mx-auto px-4 text-center relative z-10">

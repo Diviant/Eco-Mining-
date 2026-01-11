@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script>
-        // Предотвращение ошибок ReferenceError: process is not defined
         window.process = { env: { API_KEY: "" } };
     </script>
     <style>
@@ -21,7 +20,8 @@
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease-out;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity;
         }
         .reveal.active {
             opacity: 1;
@@ -49,17 +49,5 @@
 <body class="bg-white text-slate-900 antialiased overflow-x-hidden">
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
-    <script>
-        // Простой скрипт для анимации появления при скролле
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
 </body>
 </html>
