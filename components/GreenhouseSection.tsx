@@ -1,8 +1,17 @@
 
-import React from 'react';
-import { CheckCircle2, Leaf, Zap, Droplets } from 'lucide-react';
+import React, { useState } from 'react';
+import { Leaf, Zap, Droplets, Info, Thermometer } from 'lucide-react';
 
 const GreenhouseSection: React.FC = () => {
+  const [selectedPlant, setSelectedPlant] = useState<number | null>(null);
+
+  const plants = [
+    { title: "Базилик Премиум", cycle: "22 дня", temp: "+24°C", profit: "Высокая", icon: <Leaf className="w-5 h-5" />, color: "bg-emerald-500" },
+    { title: "Микрозелень", cycle: "7-10 дней", temp: "+22°C", profit: "Экстремальная", icon: <Leaf className="w-5 h-5" />, color: "bg-green-400" },
+    { title: "Салаты", cycle: "35 дней", temp: "+18°C", profit: "Средняя", icon: <Leaf className="w-5 h-5" />, color: "bg-emerald-600" },
+    { title: "Зеленый лук", cycle: "25 дней", temp: "+20°C", profit: "Стабильная", icon: <Leaf className="w-5 h-5" />, color: "bg-green-600" }
+  ];
+
   return (
     <section id="greenhouse" className="py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -10,25 +19,40 @@ const GreenhouseSection: React.FC = () => {
           <div className="flex-1">
             <div className="w-16 h-1.5 bg-emerald-500 rounded-full mb-8"></div>
             <h2 className="text-5xl font-black text-slate-900 mb-8 leading-tight italic">
-              Премиальное <br/>
-              <span className="text-emerald-600">качество урожая</span>
+              Агро-активы <br/>
+              <span className="text-emerald-600">Complex-X</span>
             </h2>
             <p className="text-xl text-slate-500 mb-12 leading-relaxed">
-              Мы используем автоматизированные системы гидропоники для выращивания самых востребованных культур. Стабильный климат от тепла асиков гарантирует рост 365 дней в году.
+              Тепло от майнеров — это бесплатный ресурс. Мы направляем его на поддержание идеального микроклимата для культур с коротким циклом и высокой маржинальностью.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {[
-                { title: "Базилик и Мята", icon: <Leaf className="w-5 h-5" /> },
-                { title: "Микрозелень", icon: <Leaf className="w-5 h-5" /> },
-                { title: "Салаты и Шпинат", icon: <Leaf className="w-5 h-5" /> },
-                { title: "Зеленый лук", icon: <Leaf className="w-5 h-5" /> },
-                { title: "Умный автополив", icon: <Droplets className="w-5 h-5" /> },
-                { title: "Контроль CO2", icon: <Zap className="w-5 h-5" /> }
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center space-x-4 p-5 rounded-2xl bg-emerald-50/50 border border-emerald-100 hover:bg-emerald-50 transition-colors">
-                  <div className="text-emerald-600">{item.icon}</div>
-                  <span className="text-slate-900 font-bold">{item.title}</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {plants.map((item, idx) => (
+                <div 
+                  key={idx} 
+                  onMouseEnter={() => setSelectedPlant(idx)}
+                  onMouseLeave={() => setSelectedPlant(null)}
+                  className={`relative group cursor-pointer p-6 rounded-3xl transition-all duration-300 border ${
+                    selectedPlant === idx ? 'bg-emerald-600 text-white border-emerald-600 shadow-xl' : 'bg-slate-50 border-slate-100 text-slate-900'
+                  }`}
+                >
+                  <div className="flex justify-between items-start mb-4">
+                    <div className={`p-3 rounded-xl ${selectedPlant === idx ? 'bg-white/20' : 'bg-white shadow-sm'} transition-colors`}>
+                      {item.icon}
+                    </div>
+                    <Info className={`w-4 h-4 opacity-50 ${selectedPlant === idx ? 'text-white' : 'text-slate-400'}`} />
+                  </div>
+                  <h4 className="font-black text-lg mb-1">{item.title}</h4>
+                  
+                  {selectedPlant === idx ? (
+                    <div className="animate-fade-up text-xs space-y-2 mt-4 font-bold uppercase tracking-wider">
+                      <div className="flex justify-between"><span>Цикл:</span> <span>{item.cycle}</span></div>
+                      <div className="flex justify-between"><span>Темп:</span> <span>{item.temp}</span></div>
+                      <div className="flex justify-between"><span>Маржа:</span> <span>{item.profit}</span></div>
+                    </div>
+                  ) : (
+                    <p className="text-slate-500 text-xs font-bold uppercase tracking-widest mt-2">Наведите для деталей</p>
+                  )}
                 </div>
               ))}
             </div>
@@ -37,26 +61,27 @@ const GreenhouseSection: React.FC = () => {
           <div className="flex-1 relative">
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-6">
-                <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl">
-                  <img src="https://images.unsplash.com/photo-1592533011831-7bc33b276228?auto=format&fit=crop&q=80&w=600" alt="Basil farm" className="w-full h-full object-cover" />
+                <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl group">
+                  <img src="https://images.unsplash.com/photo-1592533011831-7bc33b276228?auto=format&fit=crop&q=80&w=600" alt="Basil" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 </div>
-                <div className="bg-emerald-600 aspect-square rounded-[2.5rem] p-8 flex flex-col justify-end text-white">
-                  <span className="text-4xl font-black">21 день</span>
-                  <span className="text-emerald-100 font-medium">средний цикл роста</span>
+                <div className="bg-emerald-600 aspect-square rounded-[3rem] p-10 flex flex-col justify-end text-white shadow-xl">
+                  <Droplets className="w-10 h-10 mb-6 text-emerald-200" />
+                  <span className="text-4xl font-black">95%</span>
+                  <span className="text-emerald-100 font-bold text-sm uppercase">Автоматизация полива</span>
                 </div>
               </div>
-              <div className="pt-12 space-y-6">
-                <div className="bg-slate-900 aspect-square rounded-[2.5rem] p-8 flex flex-col justify-end text-white">
-                  <span className="text-4xl font-black">+24°C</span>
-                  <span className="text-slate-400 font-medium italic">идеальный климат</span>
+              <div className="pt-16 space-y-6">
+                <div className="bg-slate-900 aspect-square rounded-[3rem] p-10 flex flex-col justify-end text-white shadow-xl">
+                  <Thermometer className="w-10 h-10 mb-6 text-emerald-500" />
+                  <span className="text-4xl font-black">Stable</span>
+                  <span className="text-slate-400 font-bold text-sm uppercase">Климатический контроль</span>
                 </div>
-                <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl">
-                  <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&q=80&w=600" alt="Microgreens" className="w-full h-full object-cover" />
+                <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl group">
+                  <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?auto=format&fit=crop&q=80&w=600" alt="Micro" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 </div>
               </div>
             </div>
-            {/* Background blur */}
-            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-emerald-500/10 blur-[100px] rounded-full"></div>
+            <div className="absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-emerald-500/5 blur-[120px] rounded-full"></div>
           </div>
         </div>
       </div>
