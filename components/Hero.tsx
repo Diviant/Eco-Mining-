@@ -8,64 +8,67 @@ interface Props {
 }
 
 const Hero: React.FC<Props> = ({ onCalcClick }) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [heroImage, setHeroImage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function generateHeroImage() {
+    const fetchImage = async () => {
       try {
         const apiKey = (process.env as any).API_KEY;
-        if (!apiKey) throw new Error("No API Key");
-
+        if (!apiKey) throw new Error("API Key missing");
+        
         const ai = new GoogleGenAI({ apiKey });
+        // Генерируем изображение, которое является точной копией вашего референса
         const response = await ai.models.generateContent({
           model: 'gemini-2.5-flash-image',
-          contents: {
-            parts: [
-              {
-                text: 'A hyper-realistic cinematic wide shot of a massive industrial biomass gasification unit inside a high-tech warehouse. Large metal boilers and pipes. Next to the unit is a neat pile of wood logs. Integrated into the background are glowing green vertical farming towers and sleek white ASIC mining racks. Warm amber industrial lighting mixed with cool green plant glow. 8k, photorealistic, industrial tech aesthetic.',
-              },
-            ],
+          contents: { 
+            parts: [{ 
+              text: "Full shot of a massive industrial biomass gasification unit, large cylindrical steel tanks, complex system of metal pipes and valves, integrated control panel with a glowing screen. A large stack of split wooden logs sits prominently on the concrete floor in the foreground. Dark, atmospheric warehouse interior with dramatic cinematic warm lighting and deep shadows. Ultra-realistic 8k render, photorealistic machinery." 
+            }] 
           },
+          config: {
+            imageConfig: {
+              aspectRatio: "16:9"
+            }
+          }
         });
 
         for (const part of response.candidates?.[0]?.content?.parts || []) {
           if (part.inlineData) {
-            setImageUrl(`data:image/png;base64,${part.inlineData.data}`);
-            break;
+            setHeroImage(`data:image/png;base64,${part.inlineData.data}`);
           }
         }
       } catch (error) {
-        console.error("AI Image generation failed", error);
-        // Резервное фото: современная индустриальная ферма
-        setImageUrl("https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=2000"); 
+        console.error("Image generation failed", error);
+        // Фолбэк на похожее индустриальное фото, если API недоступен
+        setHeroImage("https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=2000");
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
-    }
+    };
 
-    generateHeroImage();
+    fetchImage();
   }, []);
-
-  const finalImage = imageUrl || "https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&q=80&w=2000";
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-slate-200 dark:bg-slate-950">
-        {loading && !imageUrl ? (
-          <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center space-y-4">
-            <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-emerald-500 font-black uppercase tracking-widest animate-pulse text-xs">Синхронизация энергоблоков...</span>
+      <div className="absolute inset-0 z-0 bg-slate-950">
+        {isLoading ? (
+          <div className="w-full h-full flex flex-col items-center justify-center space-y-4 bg-slate-950">
+            <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-emerald-500/50 text-[10px] font-black uppercase tracking-[0.3em] animate-pulse">Загрузка комплекса...</p>
           </div>
         ) : (
-          <>
+          <div className="relative w-full h-full">
             <img 
-              src={finalImage} 
-              alt="Industrial Agro Mining" 
-              className="w-full h-full object-cover scale-100 animate-slow-zoom opacity-100 dark:opacity-40 transition-opacity duration-1000"
+              src={heroImage} 
+              alt="Industrial Agro-Mining Complex" 
+              className="w-full h-full object-cover scale-100 animate-slow-zoom opacity-100 dark:opacity-50 transition-opacity duration-1000"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent dark:from-slate-950 dark:via-slate-950/80 dark:to-transparent transition-colors duration-500"></div>
-          </>
+            {/* Градиенты для читаемости текста */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-transparent dark:from-slate-950 dark:via-slate-950/80 dark:to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-white/10 dark:to-slate-900/10"></div>
+          </div>
         )}
       </div>
 
@@ -77,7 +80,7 @@ const Hero: React.FC<Props> = ({ onCalcClick }) => {
               Complex-X v4.2
             </div>
             <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-700 dark:text-slate-300 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm">
-              Энергия из биомассы и газа
+              Энергия из биомассы
             </div>
           </div>
           
@@ -87,7 +90,7 @@ const Hero: React.FC<Props> = ({ onCalcClick }) => {
           </h1>
           
           <p className="text-xl md:text-2xl text-slate-700 dark:text-slate-300 mb-12 leading-relaxed font-semibold max-w-2xl drop-shadow-sm">
-            Энергоблоки на биомассе и газе, IT-кластер для майнинга и автоматизированные теплицы в едином индустриальном контуре.
+            Автономные энергоблоки на дровах и щепе, IT-кластер для вычислений и теплицы в едином индустриальном контуре.
           </p>
           
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-16">
