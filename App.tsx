@@ -70,21 +70,21 @@ const App: React.FC = () => {
         subtitle: "Замкнутый цикл 2.0",
         image: "https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&q=80&w=1200",
         content: [
-          "Иммерсионное охлаждение асиков для 100% утилизации тепла без вентиляторов.",
-          "Газопоршневые установки Caterpillar и Jenbacher для непрерывной генерации.",
-          "Система фильтрации воздуха с рекуперацией тепла для тепличных залов.",
-          "Собственное ПО для балансировки нагрузки между майнингом и агро-системами."
+          "Иммерсионное охлаждение асиков для 100% утилизации тепла.",
+          "Газогенераторные установки на биомассе и синтез-газе.",
+          "Автоматизированный климат-контроль на базе ИИ.",
+          "Прямая интеграция систем отопления теплиц с вычислительными блоками."
         ]
       },
       energy: {
         title: "Энергетика",
-        subtitle: "Автономная генерация",
+        subtitle: "Генерация из биомассы",
         image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=1200",
         content: [
-          "Стоимость кВт*ч от 1.8 рублей при использовании магистрального газа.",
-          "Возможность работы на ПНГ (попутном нефтяном газе) прямо на месторождениях.",
-          "Модульные контейнерные решения для быстрого масштабирования до 100 МВт.",
-          "Интеллектуальная система защиты от перегрузок и стабилизации частоты."
+          "Газификация древесины: превращение дров и щепы в синтез-газ для генераторов.",
+          "Себестоимость кВт*ч от 1.4 рублей при использовании местных отходов лесозаготовки.",
+          "Уникальные системы очистки газа для продления ресурса двигателей.",
+          "Модульная архитектура: добавляйте новые блоки генерации по мере роста хешрейта."
         ]
       },
       agro: {
@@ -92,10 +92,10 @@ const App: React.FC = () => {
         subtitle: "Вертикальные фермы",
         image: "https://images.unsplash.com/photo-1530836361253-efad5d6ff430?auto=format&fit=crop&q=80&w=1200",
         content: [
-          "Круглогодичное выращивание премиальной зелени (базилик, рукола, микрозелень).",
-          "Полная автоматизация: от контроля pH раствора до спектрального освещения.",
-          "Нулевые затраты на отопление благодаря теплоотводу от майнинг-серверов.",
-          "Выход на полки ритейла в течение 24 часов после сбора урожая."
+          "Круглогодичное выращивание премиальной зелени.",
+          "Полная автоматизация полива и освещения.",
+          "Нулевые затраты на отопление — греемся энергией биткоина.",
+          "Минимальное плечо логистики: ферма находится прямо в энергоцентре."
         ]
       },
       economy: {
@@ -103,10 +103,10 @@ const App: React.FC = () => {
         subtitle: "Двойная прибыль",
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
         content: [
-          "Диверсификация: доход от криптовалют и стабильный спрос на FMCG продукты.",
-          "Снижение себестоимости зелени на 60% за счет отсутствия счетов за тепло и свет.",
-          "Срок окупаемости проекта (Payback Period) сокращается до 14-16 месяцев.",
-          "Возможность получения сельхоз-субсидий и льгот на IT-инфраструктуру."
+          "Доход от майнинга + продажа сельхозпродукции премиум-класса.",
+          "Окупаемость от 14 месяцев за счет сверхдешевой энергии.",
+          "Независимость от волатильности крипторынка благодаря реальному продукту.",
+          "Возможность масштабирования в регионах с дешевым лесом или газом."
         ]
       }
     };
@@ -184,7 +184,6 @@ const App: React.FC = () => {
               <span className="text-2xl font-black">BITMAIN</span>
               <span className="text-2xl font-black">CUMMINS</span>
               <span className="text-2xl font-black">SAMSUNG</span>
-              <span className="text-2xl font-black">NVIDIA</span>
             </div>
           </div>
         </section>
@@ -192,17 +191,14 @@ const App: React.FC = () => {
         <section className="py-32 bg-emerald-600 dark:bg-emerald-700 relative overflow-hidden transition-colors reveal">
           <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leaf.png')]"></div>
           <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <h2 className="text-4xl md:text-6xl font-black text-white mb-8 italic">Готовы запустить <br/> свой Complex-X?</h2>
-            <p className="text-emerald-50 text-xl mb-12 font-medium">Мы подготовим детальный расчет под ваши условия и стоимость газа в регионе.</p>
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-8 italic">Готовы обсудить <br/> проект?</h2>
+            <p className="text-emerald-50 text-xl mb-12 font-medium">Мы подготовим детальный расчет под ваши условия и доступное топливо в регионе.</p>
             <div className="flex flex-col sm:flex-row justify-center gap-6">
               <button 
                 onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}
                 className="bg-white text-emerald-700 px-12 py-5 rounded-2xl font-black text-xl hover:bg-emerald-50 transition-all shadow-2xl hover:-translate-y-1"
               >
                 Рассчитать прибыль
-              </button>
-              <button className="bg-emerald-800 text-white px-12 py-5 rounded-2xl font-black text-xl hover:bg-emerald-900 transition-all">
-                Связаться в Telegram
               </button>
             </div>
           </div>

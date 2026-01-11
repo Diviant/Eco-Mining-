@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ShieldCheck, Fuel, Zap } from 'lucide-react';
+import { ShieldCheck, Fuel, Zap, Trees } from 'lucide-react';
 
 interface Props {
   onMore: () => void;
@@ -13,18 +13,18 @@ const EnergySection: React.FC<Props> = ({ onMore }) => {
         <div className="flex flex-col lg:flex-row items-center gap-20">
           <div className="flex-1 text-left">
             <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-8 leading-tight">
-              Собственная генерация — <br/>
-              <span className="text-emerald-600 dark:text-emerald-500">фундамент прибыли</span>
+              Энергия из <br/>
+              <span className="text-emerald-600 dark:text-emerald-500">любого топлива</span>
             </h2>
             <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 leading-relaxed">
-              Мы не зависим от тарифов электросетей и лимитов. Наша система превращает дешевое локальное топливо в высокомаржинальный продукт.
+              Мы используем инновационные методы газификации. Наша система работает не только на газе, но и на биомассе (древесные отходы, щепа), превращая мусор в чистую энергию и тепло.
             </p>
             
-            <div className="grid gap-6">
+            <div className="grid gap-4">
               {[
-                { icon: <ShieldCheck className="text-emerald-600 dark:text-emerald-400" />, title: "Энергонезависимость", desc: "Полная защита от скачков цен и отключений." },
-                { icon: <Fuel className="text-emerald-600 dark:text-emerald-400" />, title: "Низкая себестоимость", desc: "Газ напрямую от поставщика или скважины." },
-                { icon: <Zap className="text-emerald-600 dark:text-emerald-400" />, title: "Масштабируемость", desc: "Легкое расширение мощностей под любые задачи." }
+                { icon: <Trees className="text-emerald-600 dark:text-emerald-400" />, title: "Газификация биомассы", desc: "Использование дров и древесных отходов." },
+                { icon: <Fuel className="text-emerald-600 dark:text-emerald-400" />, title: "Работа на ПНГ и Газе", desc: "Прямое подключение к скважинам или сетям." },
+                { icon: <ShieldCheck className="text-emerald-600 dark:text-emerald-400" />, title: "Полная автономность", desc: "Независимость от региональных тарифов и лимитов." }
               ].map((item, idx) => (
                 <div 
                   key={idx} 
@@ -42,13 +42,14 @@ const EnergySection: React.FC<Props> = ({ onMore }) => {
           </div>
           
           <div className="flex-1 w-full">
-            <div className="bg-white dark:bg-slate-900 rounded-[3rem] p-12 shadow-2xl shadow-emerald-200/50 dark:shadow-black border border-emerald-100 dark:border-emerald-900/50">
-              <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-10">Сравнение тарифов</h3>
+            <div className="bg-white dark:bg-slate-900 rounded-[3rem] p-12 shadow-2xl shadow-emerald-200/50 dark:shadow-black border border-emerald-100 dark:border-emerald-900/50 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-3xl rounded-full"></div>
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-10">Экономика генерации</h3>
               <div className="space-y-10">
                 <div>
                   <div className="flex justify-between text-sm font-bold mb-3 uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                    <span>Городские сети</span>
-                    <span className="text-slate-600 dark:text-slate-300">~ 7.50 ₽</span>
+                    <span>Сети (Средний тариф)</span>
+                    <span className="text-slate-600 dark:text-slate-300">~ 7.80 ₽</span>
                   </div>
                   <div className="w-full bg-slate-100 dark:bg-slate-800 h-4 rounded-full">
                     <div className="bg-slate-300 dark:bg-slate-600 h-full w-[100%] rounded-full"></div>
@@ -56,16 +57,16 @@ const EnergySection: React.FC<Props> = ({ onMore }) => {
                 </div>
                 <div>
                   <div className="flex justify-between text-sm font-bold mb-3 uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
-                    <span>Наш комплекс</span>
-                    <span className="text-emerald-700 dark:text-emerald-200">1.80 - 2.20 ₽</span>
+                    <span>Complex-X (Биомасса/Газ)</span>
+                    <span className="text-emerald-700 dark:text-emerald-200">1.40 - 2.10 ₽</span>
                   </div>
                   <div className="w-full bg-emerald-50 dark:bg-emerald-900/30 h-4 rounded-full">
-                    <div className="bg-emerald-500 dark:bg-emerald-400 h-full w-[28%] rounded-full shadow-lg shadow-emerald-200 dark:shadow-emerald-900/40"></div>
+                    <div className="bg-emerald-500 dark:bg-emerald-400 h-full w-[22%] rounded-full shadow-lg shadow-emerald-200 dark:shadow-emerald-900/40"></div>
                   </div>
                 </div>
               </div>
-              <div className="mt-12 p-6 bg-emerald-50 dark:bg-emerald-950/50 rounded-2xl border border-emerald-100 dark:border-emerald-900 text-sm text-emerald-800 dark:text-emerald-200 font-medium text-center">
-                💡 Экономия на энергии полностью покрывает операционные расходы агро-комплекса.
+              <div className="mt-12 p-6 bg-emerald-50 dark:bg-emerald-950/50 rounded-2xl border border-emerald-100 dark:border-emerald-900 text-sm text-emerald-800 dark:text-emerald-200 font-medium text-center italic">
+                "Мы превращаем отходы лесозаготовки в биткоины и свежий базилик."
               </div>
             </div>
           </div>
