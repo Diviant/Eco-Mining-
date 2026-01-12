@@ -1,83 +1,36 @@
 
-import React, { useState, useEffect } from 'react';
-import { Zap, TrendingUp, ShieldCheck, Sparkles, Loader2 } from 'lucide-react';
-import { GoogleGenAI } from "@google/genai";
+import React from 'react';
+import { Zap, TrendingUp, ShieldCheck } from 'lucide-react';
 
 interface Props {
   onCalcClick: () => void;
 }
 
 const Hero: React.FC<Props> = ({ onCalcClick }) => {
-  const [generatedImage, setGeneratedImage] = useState<string | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [error, setError] = useState(false);
-
-  // Качественный фоллбек в стиле индустриального хай-тека
-  const fallbackImage = require('./hero.png');
-
-  useEffect(() => {
-    const generateConceptImage = async () => {
-      if (!process.env.API_KEY) return;
-      
-      setIsGenerating(true);
-      try {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-        const prompt = "Photorealistic, cinematic 3D isometric view of a high-tech industrial 'Complex-X'. Left side: a pile of wood logs and chips being fed into a sleek stainless steel gasifier unit. Glowing orange pipes transmit thermal energy into a modern glass greenhouse filled with vibrant vertical hydroponic basil on the right. Middle section: a server rack of Bitcoin ASIC miners glowing with neon green and blue LEDs. The atmosphere is professional, clean energy, future tech, 8k resolution, octane render style.";
-        
-        const response = await ai.models.generateContent({
-          model: 'gemini-2.5-flash-image',
-          contents: {
-            parts: [{ text: prompt }],
-          },
-          config: {
-            imageConfig: {
-              aspectRatio: "16:9"
-            }
-          }
-        });
-
-        const imagePart = response.candidates?.[0]?.content?.parts.find(p => p.inlineData);
-        if (imagePart?.inlineData) {
-          setGeneratedImage(`data:image/png;base64,${imagePart.inlineData.data}`);
-        } else {
-          setError(true);
-        }
-      } catch (err) {
-        console.error("AI Generation failed:", err);
-        setError(true);
-      } finally {
-        setIsGenerating(false);
-      }
-    };
-
-    generateConceptImage();
-  }, []);
+  // Путь '/hero.png' будет искать файл в корне папки public.
+  // Просто загрузите ваш файл hero.png в созданную папку public.
+  const heroImage = "/hero.png";
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-slate-950">
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full">
-          {isGenerating ? (
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-900">
-              <div className="relative">
-                <div className="w-32 h-32 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
-                <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-emerald-500 animate-pulse" size={32} />
-              </div>
-              <p className="mt-8 text-emerald-400 font-black text-xs uppercase tracking-[0.4em] animate-pulse text-center px-4">
-                Визуализация концепции <br/> <span className="text-white opacity-50">Нейросеть генерирует уникальный объект...</span>
-              </p>
-            </div>
-          ) : (
-            <img 
-              src={generatedImage || fallbackImage} 
-              alt="Agro-Mining Tech Complex" 
-              className={`w-full h-full object-cover transition-all duration-1000 ${generatedImage ? 'scale-100' : 'scale-105'} opacity-70 contrast-110 brightness-[0.7] saturate-[0.8]`}
-            />
-          )}
+          <img 
+            src={heroImage} 
+            alt="Agro-Mining Tech Complex" 
+            className="w-full h-full object-cover opacity-60 contrast-110 brightness-[0.7] saturate-[0.8]"
+            onError={(e) => {
+              // Если файл /hero.png еще не загружен или не найден, 
+              // покажется это временное качественное изображение.
+              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=2070&auto=format&fit=crop";
+            }}
+          />
           
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-950"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/20 to-transparent"></div>
+          {/* Наложения для глубины */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-transparent to-slate-950"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/30 to-transparent"></div>
           
+          {/* Световые эффекты */}
           <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-emerald-500/10 blur-[150px] rounded-full"></div>
           <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-orange-500/10 blur-[150px] rounded-full"></div>
         </div>
@@ -88,10 +41,10 @@ const Hero: React.FC<Props> = ({ onCalcClick }) => {
           <div className="flex flex-wrap gap-3 mb-8 animate-fade-up">
             <div className="inline-flex items-center px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl text-emerald-400 text-[10px] font-black uppercase tracking-[0.25em] shadow-2xl">
               <span className="w-2 h-2 rounded-full bg-emerald-500 mr-3 animate-pulse"></span>
-              {generatedImage ? 'AI Concept Generated' : 'Complex-X v5.0 Final'}
+              Autonomous Complex-X
             </div>
             <div className="inline-flex items-center px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl text-orange-400 text-[10px] font-black uppercase tracking-[0.25em] shadow-2xl">
-              Wood-to-Bitcoin Autonomy
+              Wood-to-Bitcoin Tech
             </div>
           </div>
           
@@ -136,10 +89,6 @@ const Hero: React.FC<Props> = ({ onCalcClick }) => {
             </div>
           </div>
         </div>
-      </div>
-      
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-1 h-12 bg-gradient-to-b from-emerald-500 to-transparent rounded-full opacity-50"></div>
       </div>
     </section>
   );
