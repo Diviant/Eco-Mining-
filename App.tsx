@@ -68,7 +68,7 @@ const App: React.FC = () => {
       tech: {
         title: "IT-Инфраструктура",
         subtitle: "Майнинг v2.0",
-        image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=1200", // Hardware/Mining gear
+        image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200",
         content: [
           "Иммерсионные ванны: асики полностью погружены в диэлектрическую жидкость для 100% отвода тепла.",
           "Максимальный разгон: жидкостное охлаждение позволяет безопасно увеличивать хешрейт на 25-40%.",
@@ -79,7 +79,7 @@ const App: React.FC = () => {
       energy: {
         title: "Энергоцентр",
         subtitle: "Генерация из биомассы",
-        image: "https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80&w=1200", // Industrial pipes matching user photo
+        image: "https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&q=80&w=1200",
         content: [
           "Газификация древесины: высокотехнологичные установки превращают дрова, щепу и пеллеты в синтез-газ.",
           "Экономика 1.4: минимальная себестоимость кВт за счет использования местных отходов лесозаготовки.",
@@ -90,7 +90,7 @@ const App: React.FC = () => {
       agro: {
         title: "Агрокомплекс",
         subtitle: "Вертикальные фермы",
-        image: "https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&q=80&w=1200", // Modern vertical farm
+        image: "https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&q=80&w=1200",
         content: [
           "Нулевые затраты на отопление: теплицы обогреваются бесплатной энергией, выделяемой при майнинге.",
           "Многоярусная гидропоника: полезная площадь выращивания увеличивается в 4-6 раз.",
@@ -101,7 +101,7 @@ const App: React.FC = () => {
       economy: {
         title: "Экономика проекта",
         subtitle: "Двойная маржинальность",
-        image: "https://images.unsplash.com/photo-1551288049-bb848a55a075?auto=format&fit=crop&q=80&w=1200", // Data and charts
+        image: "https://images.unsplash.com/photo-1551288049-bb848a55a075?auto=format&fit=crop&q=80&w=1200",
         content: [
           "Диверсификация активов: вы получаете доход в криптовалюте (BTC) и фиатных деньгах от продажи зелени.",
           "Защита от волатильности: когда рынок крипты падает, агро-актив продолжает генерировать стабильную выручку.",

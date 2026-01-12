@@ -43,7 +43,7 @@ const EconomySection: React.FC = () => {
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-10 rounded-[3rem] shadow-xl">
             <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-10 flex items-center">
               <span className="w-2 h-8 bg-emerald-500 rounded-full mr-4"></span>
-              Прогноз выручки (USD/₽)
+              Прогноз выручки (IT + АГРО)
             </h3>
             <div className="h-[400px] w-full">
               <ResponsiveContainer width="100%" height="100%">
@@ -67,8 +67,8 @@ const EconomySection: React.FC = () => {
             <h3 className="text-2xl font-black mb-8 italic">Структура себестоимости кВт/ч</h3>
             <div className="space-y-6">
               {[
-                { label: "Топливо (Газ)", percent: 65, color: "bg-emerald-500" },
-                { label: "Обслуживание ГПУ", percent: 15, color: "bg-blue-500" },
+                { label: "Топливо (Биомасса/Щепа)", percent: 58, color: "bg-emerald-500" },
+                { label: "Обслуживание генерации", percent: 22, color: "bg-blue-500" },
                 { label: "ФОТ персонала", percent: 12, color: "bg-slate-500" },
                 { label: "Агро-расходники", percent: 8, color: "bg-emerald-300" }
               ].map((item, idx) => (
@@ -85,7 +85,7 @@ const EconomySection: React.FC = () => {
             </div>
             <div className="mt-12 pt-8 border-t border-white/10">
               <p className="text-slate-400 text-sm italic font-medium">
-                * Расчет произведен для комплекса мощностью 500 кВт при цене газа 6.5 ₽/м³.
+                * Расчет произведен для автономного комплекса на базе газогенератора при использовании местных отходов лесозаготовки.
               </p>
             </div>
           </div>
