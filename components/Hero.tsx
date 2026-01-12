@@ -13,7 +13,7 @@ const Hero: React.FC<Props> = ({ onCalcClick }) => {
   const [error, setError] = useState(false);
 
   // Качественный фоллбек в стиле индустриального хай-тека
-  const fallbackImage = "./hero.png";
+  const fallbackImage = require('./hero.png');
 
   useEffect(() => {
     const generateConceptImage = async () => {
